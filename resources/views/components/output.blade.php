@@ -14,7 +14,7 @@
         }
         @media print{@page {size: landscape}}
     </style>
-    <table border="1" id="main_table">
+    <table border="1" id="tbl_exporttable_to_xls">
                 <thead>
                     <tr>
                         <th

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\FileUploadController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,16 +16,17 @@ use Illuminate\Support\Facades\Route;
 
 // MISC
 
-function hasUser()
-{
-    return !User::count();
-}
+// function hasUser()
+// {
+//     return !User::count();
+// }
 
 //
 
 Route::redirect('/', '/login');
 
-Auth::routes(['register' => call_user_func('hasUser')]);
+Auth::routes(['register' => true]);
+// Auth::routes(['register' => call_user_func('hasUser')]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('home');

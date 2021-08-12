@@ -18,7 +18,8 @@
                     </a>
                     <button
                     class="btn btn-success btn-sm"
-                    onclick="exportToExcel($('#main_table').html())">
+                    onclick="exportToExcel('xlsx')"
+                    >
                         <i class="fa fa-file-excel mr-1"></i>
                         Export
                     </button>
@@ -32,6 +33,7 @@
 @stop
 @section('js')
     <script src="/js/export2excel.js"></script>
+    <script src="/js/excel.js"></script>
     <script>
         function printContent(el){
             var restorepage = $('body').html();

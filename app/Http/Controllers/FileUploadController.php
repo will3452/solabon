@@ -48,11 +48,23 @@ class FileUploadController extends Controller
     public function removeNullRow($data)
     {
         $newarr = [];
+        $remove = [
+            'Timekeeping System',
+            'EMPLOYEE ATTENDANCE LOGS',
+            'ID No. :',
+            'Dept. :',
+            'Name :',
+        ];
         foreach ($data as $d) {
+            for ($i = 0; $i < count($d); $i++) {
+                !in_array($d[$i], $remove) ?: $d[$i] = null;
+            }
             if (!$this->containsOnlyNull($d)) {
                 array_push($newarr, $d);
             }
         }
+
+        // dd($newarr[10]);
         return $newarr;
     }
 
@@ -74,31 +86,31 @@ class FileUploadController extends Controller
         $i = 0;
         while ($i < $len) {
             $person = new Person();
-            if (!empty($arr[$i][2]) && !empty($arr[$i][5])) {
-                $person->ref = $arr[$i][2];
-                $person->dept = $arr[$i][5];
+            if (!empty($arr[$i][4]) && !empty($arr[$i][12])) {
+                $person->ref = $arr[$i][4];
+                $person->dept = $arr[$i][12];
                 $i++;
-                $person->name = $arr[$i][2];
+                $person->name = $arr[$i][4];
                 $i++;
             }
-            if ($arr[$i][1] === "DATE") {
+            if ($arr[$i][2] === "DATE") {
                 $i++;
             }
             $totalIsZero = false;
-            while ($arr[$i][1] != null) {
-                if (($arr[$i][3] != null || $arr[$i][3] != 0) &&
-                    ($arr[$i][4] == null || $arr[$i][4] == 0)) {
+            while ($arr[$i][2] != null) {
+                if (($arr[$i][6] != null || $arr[$i][6] != 0) &&
+                    ($arr[$i][11] == null || $arr[$i][11] == 0)) {
                     $totalIsZero = true;
                 }
                 $person->addRecords([
-                    'date' => $arr[$i][1],
-                    'time_in' => $arr[$i][3],
-                    'time_out' => $arr[$i][4],
+                    'date' => $arr[$i][2],
+                    'time_in' => $arr[$i][6],
+                    'time_out' => $arr[$i][11],
                 ]);
                 $i++;
             }
-            if ($arr[$i][6] != null) {
-                $total = $this->calculateTotal($arr[$i][6]);
+            if ($arr[$i][7] != null) {
+                $total = $this->calculateTotal($arr[$i][7]);
                 $person->total = $totalIsZero ? '0.00' : number_format($total, 2);
             }
 
@@ -117,6 +129,7 @@ class FileUploadController extends Controller
         $data = $reader->load(storage_path('app\\' . $path));
         $arr = $data->getSheet(0)->toArray();
         $arr = $this->removeNullRow($arr);
+
         return $this->initRecords($arr, $persons);
     }
 
