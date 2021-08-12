@@ -2,19 +2,22 @@
 
 <div>
     <link rel="stylesheet" href="/css/admin_custom.css">
-    <style>
-        table{
-            margin: 0px;
-            background: #fff;
-            width: 100%;
-            border-collapse: collapse;
-        }
-        td,th{
-            font-size:10px;
-        }
-        @media print{@page {size: landscape}}
-    </style>
+    
     <table border="1" id="tbl_exporttable_to_xls">
+        <style>
+        table{
+                margin: 0px;
+                background: #fff;
+                width: 100%;
+                border-collapse: collapse;
+            }
+            td,th{
+                font-size:10px;
+            }
+            @media print{
+                @page {size: landscape}
+            }
+        </style>
                 <thead>
                     <tr>
                         <th
@@ -78,7 +81,7 @@ style="text-align:center;border:1px solid #000;" ></td>
                 <tbody>
                     @foreach ($records as $key=>$record)
                         <tr>
-                            <th>
+                            <th style="font-weight: bolder">
                                 {{ $key }}
                             </th>
                             

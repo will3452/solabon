@@ -33,7 +33,7 @@
 @stop
 @section('js')
     <script src="/js/export2excel.js"></script>
-    <script src="/js/excel.js"></script>
+    <script src="/js/jquery.table2excel.js"></script>
     <script>
         function printContent(el){
             var restorepage = $('body').html();
