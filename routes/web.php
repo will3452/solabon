@@ -33,4 +33,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 
 Route::post('/upload', [FileUploadController::class, 'storeFile']);
 Route::get('/records/{id}', [FileUploadController::class, 'show']);
+Route::delete('/records/{id}', [FileUploadController::class, 'destroy']);
 Route::get('/print/{id}', [FileUploadController::class, 'print']);

@@ -21,7 +21,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $files = \App\Models\File::get();
+        $files = \App\Models\File::latest()->get();
         return view('home', compact('files'));
     }
 }

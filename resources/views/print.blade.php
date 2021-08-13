@@ -1,1 +1,1 @@
-<x-output :title="$title" :records="$records" :dates="$dates"/>
+<x-output :title="$title" :records="$records" :dates="$dates" :name="$file->name"/>

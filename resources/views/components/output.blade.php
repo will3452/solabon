@@ -1,4 +1,4 @@
-@props(['dates', 'records', 'title'])
+@props(['dates', 'records', 'title', 'name'])
 
 <div>
     <link rel="stylesheet" href="/css/admin_custom.css">
@@ -133,6 +133,24 @@ style="text-align:center;border:1px solid #000;" >
                     window.print();
                 }
             </script>
+    @endif
+
+    @if (isset(request()->is_excel))
+        <script src="/vendor/jquery/jquery.min.js"></script>
+        <script src="/js/export2excel.js"></script>
+        <script src="/js/jquery.table2excel.js"></script>
+
+        <script>
+            (function exportToExcel() {
+                $("#tbl_exporttable_to_xls").table2excel({
+                    // exclude CSS class
+                    exclude: ".noExl",
+                    name: "Worksheet Name",
+                    filename: "{{$name}}", //do not include extension
+                    fileext: ".xls" // file extension
+                }); 
+            })();
+        </script>
     @endif
             
 </div>

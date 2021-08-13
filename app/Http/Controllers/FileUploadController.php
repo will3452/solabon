@@ -30,13 +30,16 @@ class FileUploadController extends Controller
     {
         $data = request()->validate([
             'file' => 'required|mimes:xls',
+            'name' => 'required|unique:files,name',
         ]);
 
         //save file
-        $path = $data['file']->store('public/files');
-        File::create(['path' => $path]);
+        $data['path'] = $data['file']->store('public/files');
+        unset($data['file']);
 
-        toast('file was submitted!', 'success');
+        File::create($data);
+
+        alert('file was submitted!', 'success');
         return back();
     }
 
@@ -174,6 +177,13 @@ class FileUploadController extends Controller
     {
         [$title, $records, $file, $dates] = $this->processRecords($id);
         return view('records.show', compact('records', 'file', 'dates', 'title'));
+    }
+
+    public function destroy($id)
+    {
+        File::find($id)->delete();
+        alert('Removed Done!', 'success');
+        return back();
     }
 
     function print($id) {

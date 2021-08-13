@@ -18,6 +18,11 @@
 @section('body_data', $layoutHelper->makeBodyData())
 
 @section('body')
+    <style>
+        body {
+            background:#E4EDF6;
+        }
+    </style>
     <div class="wrapper">
 
         {{-- Top Navbar --}}
